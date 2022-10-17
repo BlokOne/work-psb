@@ -1,0 +1,125 @@
+{% extends 'layout/index.html' %}
+{% block content %}
+    <!--app-content open-->
+    <div class="main-content app-content mt-0" xmlns="http://www.w3.org/1999/html">
+        <div class="side-app">
+
+            <!-- CONTAINER -->
+            <div class="main-container container-fluid">
+
+                <!-- PAGE-HEADER -->
+                <div class="page-header">
+                    <h1 class="page-title">Магазин услуг</h1>
+                    <div>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="javascript:void(0)">Главная</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Заказать услугу</li>
+                        </ol>
+                    </div>
+                </div>
+                <!-- PAGE-HEADER END -->
+
+                <!-- ROW-1 OPEN -->
+                <div class="row row-cards">
+                    <!-- COL-END -->
+                    <div class="col-xl-12 col-lg-12">
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div class="card p-0">
+                                    <div class="card-body p-4">
+                                        <div class="row">
+                                            <div class="col-xl-5 col-lg-6 col-md-5 col-sm-6">
+                                                <div class="input-group d-flex w-100 float-start my-1">
+                                                    <input type="text" class="form-control" placeholder="Поиск по услугам">
+                                                    <button class="btn input-group-text bg-transparent text-muted">
+                                                        <i class="fa fa-search fs-16" aria-hidden="true"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-7 col-lg-6 col-md-7 col-sm-6">
+                                                <div class="float-sm-end float-none my-1">
+                                                    <a href="cart.html" class="btn btn-primary me-2">Заказать индивидуальный сервер</a>
+                                                    <a href="javascript:void(0)" class="btn btn-primary">Связаться с Тех-поддержкой</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tab-11">
+                                <div class="row">
+                                    {% for serv in page_obj %}
+                                        <div class="col-sm-6 col-md-6 col-xl-3 alert">
+                                            <div class="card">
+                                                <div class="product-grid6">
+                                                    <div class="product-image6 p-5">
+                                                        <a href="#" >
+                                                            <img class="img-fluid br-7 w-100" src="/static/assets/images/media/server.png" alt="img">
+                                                        </a>
+                                                    </div>
+                                                    <div class="card-body pt-0">
+                                                        <div class="product-content text-center">
+                                                            <h1 class="title fw-bold fs-20"><a href="#">{{ serv.title }}</a></h1>
+                                                            <p class="text fs-18">{{ serv.configurations }}</p>
+                                                            <div class="mb-2 text-warning">
+                                                                <i class="fa fa-star text-warning"></i>
+                                                                <i class="fa fa-star text-warning"></i>
+                                                                <i class="fa fa-star text-warning"></i>
+                                                                <i class="fa fa-star-half-o text-warning"></i>
+                                                                <i class="fa fa-star-o text-warning"></i>
+                                                            </div>
+                                                            <div class="price mb-2">${{ serv.price }}<span class="ms-4">${{ serv.total }}</span></div>
+                                                            <span class="text-success fs-18 fw-semibold">В наличии</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-footer text-center">
+                                                        <form action="{% url "cart:cart_add" serv.id %}" method="post">
+                                                            <input type="hidden" name="quantity" value="1">
+                                                            {% csrf_token %}
+                                                            <button type="submit" class="btn btn-primary mx-2 mb-1 w-sm"><i class="fe fe-shopping-cart me-2"></i>В коpзину</button>
+                                                            <a href="javascript:void(0)" class="btn btn-light mx-2 mb-1 w-sm"><i class="fe fe-share-2 me-2 text-dark"></i>Поделиться</a>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <div class="mb-5">
+                                    <div class="center">
+                                        <ul class="pagination justify-content-center">
+                                            <li class="page-item page-prev">
+                                                {% if page_obj.has_previous %}
+                                                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}" tabindex="-1">Назад</a>
+                                                {% endif %}
+                                            </li>
+                                            {% for i in page_obj.paginator.page_range %}
+                                                {% if page_obj.number == i %}
+                                                    <li class="page-item active"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                                                {% elif i >= page_obj.number|add:-2 and i <= page_obj.number|add:2 %}
+                                                    <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                                                {% endif %}
+                                            {% endfor %}
+                                            <li class="page-item page-next">
+                                                {% if page_obj.has_next %}
+                                                    <a class="page-link" href="?page={{ page_obj.next_page_number }}">Вперед</a>
+                                                {% endif %}
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- COL-END -->
+                    </div>
+                    <!-- ROW-1 CLOSED -->
+                </div>
+                <!-- ROW-1 END-->
+            </div>
+            <!-- CONTAINER CLOSED -->
+        </div>
+    </div>
+    <!--app-content closed-->
+{% endblock %}

@@ -1,0 +1,82 @@
+{% extends 'layout/index.html' %}
+
+{% block content %}
+    <div class="main-content app-content mt-0">
+        <div class="side-app">
+
+            <!-- CONTAINER -->
+            <div class="main-container container-fluid">
+
+                <!-- PAGE-HEADER -->
+                <div class="page-header">
+                    <h1 class="page-title">Оформление заказа</h1>
+                    <div>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="javascript:void(0)">Магазин</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Оплата</li>
+                        </ol>
+                    </div>
+                </div>
+                <!-- PAGE-HEADER END -->
+
+                <!-- ROW-1 OPEN -->
+                <div class="row">
+                    <div class="col-xl-8 col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Способ оплаты</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="card-pay">
+                                    <ul class="tabs-menu nav">
+                                        <li class="">
+                                            <p>Доступный способ оплаты, счет на оплату придет вам на почту, убедитесь что у вас активный почтовый адрес!</p>
+                                            <a href="#tab20" class=" active" data-bs-toggle="tab"><i class="wi wi-night-lightning"></i> CryptoCloud</a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane active show" id="tab20">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-md-12">
+                        <div class="card cart">
+                            <div class="card-header">
+                                <h3 class="card-title">Ваз заказ</h3>
+                            </div>
+                            <div class="card-body">
+                                {% with total_items=cart|length %}
+                                    {% if cart|length > 0 %}
+                                        <ul class="list-group border br-7 mt-5">
+                                            <li class="list-group-item border-0">
+                                                Сумма заказа
+                                                <span class="h6 fw-bold mb-0 float-end">$ {{ cart.get_total_price }}</span>
+                                            </li>
+                                            <li class="list-group-item border-0">
+                                                Размещение
+                                                <span class="h6 fw-bold mb-0 float-end">Бесплатно</span>
+                                            </li>
+                                            <li class="list-group-item border-0">
+                                                К оплате
+                                                <span class="h4 fw-bold mb-0 float-end">$ {{ cart.get_total_price }}</span>
+                                            </li>
+                                        </ul>
+                                    {% endif %}
+                                {% endwith %}
+                            </div>
+                            <div class="card-footer text-end">
+                                <input type='button' class="btn btn-primary" value='Оплатить заказ' id='click-payment'>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ROW-1 CLOSED -->
+            </div>
+            <!-- CONTAINER CLOSED -->
+
+        </div>
+    </div>
+{% endblock %}
