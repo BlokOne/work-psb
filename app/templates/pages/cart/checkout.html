@@ -1,5 +1,9 @@
 {% extends 'layout/index.html' %}
 
+{% block title %}
+<title>psb-hosting.pro - Оформление заказа - VPS/VDS сервера для вашего бизнеса</title>
+{% endblock %}
+
 {% block content %}
     <div class="main-content app-content mt-0">
         <div class="side-app">
@@ -45,7 +49,7 @@
                     <div class="col-xl-4 col-md-12">
                         <div class="card cart">
                             <div class="card-header">
-                                <h3 class="card-title">Ваз заказ</h3>
+                                <h3 class="card-title">Ваш заказ</h3>
                             </div>
                             <div class="card-body">
                                 {% with total_items=cart|length %}
@@ -68,7 +72,7 @@
                                 {% endwith %}
                             </div>
                             <div class="card-footer text-end">
-                                <input type='button' class="btn btn-primary" value='Оплатить заказ' id='click-payment'>
+                                <a class="btn btn-primary" href="{% url "payments:order_create" %}" id='click-payment'>Оплатить заказ</a>
                             </div>
                         </div>
                     </div>

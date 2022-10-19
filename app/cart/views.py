@@ -1,3 +1,5 @@
+import uuid
+
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect, get_object_or_404
@@ -32,13 +34,27 @@ def cart_remove(request, pk):
 
 class Cart_Detail(LoginRequiredMixin, TemplateView):
     login_url = '/accounts/login/'
-    template_name = 'cart/cart.html'
+    template_name = 'pages/cart/cart.html'
 
     def get(self, request):
         cart = Cart(request)
-        return render(request, 'cart/cart.html', {'cart': cart})
+        return render(request, self.template_name, {'cart': cart})
 
 
 class Checkout(LoginRequiredMixin, TemplateView):
     login_url = '/accounts/login/'
-    template_name = 'cart/checkout.html'
+    template_name = 'pages/cart/checkout.html'
+
+    def get_context_data(self, **kwargs):
+        api_key = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MjY4NCwiZXhwIjo4ODA2NTkxOTU4NX0.fTA4NbQnl_-MD7W1Os2mAYqFow_5n1hiXUUAtbifHno'
+        shop_id = 'Hz7LH3DF6ddE1WuU'
+        order_id = uuid.uuid4()
+        currency = "USD"
+        context = {
+            "api_key": api_key,
+            "shop_id": shop_id,
+            "order_id": order_id,
+            "currency": currency,
+        }
+        return context
+

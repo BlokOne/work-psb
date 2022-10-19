@@ -1,0 +1,87 @@
+{% extends "layout/index.html" %}
+
+{% block title %}Checkout{% endblock %}
+
+{% block content %}
+    <div class="main-content app-content mt-0">
+        <div class="side-app ">
+
+            <!-- CONTAINER -->
+            <div class="main-container container-fluid">
+
+                <!-- PAGE-HEADER -->
+                <div class="page-header">
+                    <h1 class="page-title">Подтверждение заказа</h1>
+                    <div>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="javascript:void(0)">Магазин</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Оплата счета</li>
+                        </ol>
+                    </div>
+                </div>
+                <!-- PAGE-HEADER END -->
+
+                <!-- ROW-1 OPEN -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <a class="header-brand" href="{% url 'shop:index' %}">
+                                            <img src="/static/assets/images/logo.png" class="header-brand-img logo-3" height="100" alt="Sash logo">
+                                        </a>
+                                        <div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="table-responsive push">
+                                    <table class="table table-bordered table-hover mb-0 text-nowrap">
+                                        <tbody>
+                                        <tr class=" ">
+                                            <th class="text-center"></th>
+                                            <th>Товар</th>
+                                            <th class="text-center">Количество</th>
+                                            <th class="text-end">Цена за штуку</th>
+                                            <th class="text-end">Общая цена</th>
+                                        </tr>
+                                        {% for item in cart %}
+                                            <tr>
+                                                <td class="text-center">{{ item.product.id }}</td>
+                                                <td>
+                                                    <p class="font-w600 mb-1">{{ item.product.title }}</p>
+                                                    <div class="text-muted">
+                                                        <div class="text-muted">{{ item.product.configurations }}</div>
+                                                    </div>
+                                                </td>
+                                                <td class="text-center">{{ item.quantity }}</td>
+                                                <td class="text-end">${{ item.product.price }}</td>
+                                                <td class="text-end">${{ item.total_price }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="card-footer text-end">
+                                <form method="post" class="order-form">
+                                    {{ form.as_p }}
+                                    {{ form.errors }}
+                                    <p><input type="submit" value="Place order"></p>
+                                    {% csrf_token %}
+                                </form>
+                                <button type="button" class="btn btn-primary mb-1" onclick="javascript:window.print();"><i class="si si-wallet"></i> Pay Invoice</button>
+                                <button type="button" class="btn btn-secondary mb-1" onclick="javascript:window.print();"><i class="si si-paper-plane"></i> Send Invoice</button>
+                                <button type="button" class="btn btn-danger mb-1" onclick="javascript:window.print();"><i class="si si-printer"></i> Print Invoice</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- COL-END -->
+                </div>
+                <!-- ROW-1 CLOSED -->
+
+            </div>
+            <!-- CONTAINER CLOSED -->
+        </div>
+    </div>
+{% endblock %}

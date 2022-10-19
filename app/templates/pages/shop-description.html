@@ -1,0 +1,87 @@
+{% extends 'layout/index.html' %}
+
+{% block content %}
+    <!--app-content open-->
+    <div class="main-content app-content mt-0">
+        <div class="side-app">
+
+            <!-- CONTAINER -->
+            <div class="main-container container-fluid">
+
+                <!-- PAGE-HEADER -->
+                <div class="page-header">
+                    <h1 class="page-title">Детальный просмотр</h1>
+                    <div>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="javascript:void(0)">Магазин</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">{{ product.title }}</li>
+                        </ol>
+                    </div>
+                </div>
+                <!-- PAGE-HEADER END -->
+
+                <!-- ROW-1 OPEN -->
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row row-sm">
+                                    <div class="col-xl-5 col-lg-12 col-md-12">
+                                        <div class="row">
+                                            <div class="col-xl-12">
+                                                <div class="product-carousel">
+                                                    <div id="Slider" class="carousel slide border" data-bs-ride="false">
+                                                        <div class="carousel-inner">
+                                                            <div class="carousel-item active"><img src="/static/assets/images/media/server.png" alt="img" class="img-fluid mx-auto d-block">
+                                                                <div class="text-center mt-5 mb-5 btn-list">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="details col-xl-7 col-lg-12 col-md-12 mt-4 mt-xl-0">
+                                        <div class="mt-2 mb-4">
+                                            <h3 class="mb-3 fw-semibold">{{ product.title }}</h3>
+                                            <p class="text-muted float-start me-3">
+                                                <span class="fa fa-star text-warning"></span>
+                                                <span class="fa fa-star text-warning"></span>
+                                                <span class="fa fa-star text-warning"></span>
+                                                <span class="fa fa-star-half-o text-warning"></span>
+                                                <span class="fa fa-star-o text-warning"></span>
+                                            </p>
+                                            <p class="text-muted mb-4">( 40 Человек уже оценили) </p>
+                                            <h4 class="mt-4"><b>Входит в стоимость</b></h4>
+                                            <i class="fe fe-check-circle text-green"></i>Защита от DDoS<br>
+                                            <i class="fe fe-check-circle text-green"></i>Отказоустойчивость<br>
+                                            <i class="fe fe-check-circle text-green"></i>Стабильный интернет<br>
+                                            <i class="fe fe-check-circle text-green"></i>Базовая техническая поддержка<br>
+                                            <i class="fe fe-check-circle text-green"></i>Помощь с переездом <span class="badge bg-purple br-5 side-badge blink-text pb-1">Новинка</span><br>
+                                            <h4 class="mt-4"><b> Конфигурация</b></h4>
+                                            <p>{{ product.configurations }}</p>
+                                            <h3 class="mb-4"><span class="me-2 fw-bold fs-25">${{ product.price }} USD/</span><span><del class="fs-18 text-muted">${{ product.total }}</del></span></h3>
+                                            <div class=" mt-4 mb-5"><span class="fw-bold me-2">Наличие :</span><span class="fw-bold text-success">В наличии</span></div>
+                                            <hr>
+                                            <div class="btn-list mt-4">
+                                                    <form action="{% url "cart:cart_add" product.id %}" method="post">
+                                                        <input type="hidden" name="quantity" value="1">
+                                                        {% csrf_token %}
+                                                        <button type="submit" class="btn btn-primary mx-2 mb-1 w-sm"><i class="fe fe-shopping-cart me-2"></i>В коpзину</button>
+                                                        <a href="javascript:void(0)" class="btn btn-light mx-2 mb-1 w-sm"><i class="fe fe-share-2 me-2 text-dark"></i>Поделиться</a>
+                                                    </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ROW-1 CLOSED -->
+                </div>
+                <!-- CONTAINER CLOSED -->
+            </div>
+        </div>
+        <!--app-content closed-->
+{% endblock %}
