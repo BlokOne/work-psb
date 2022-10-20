@@ -7,7 +7,7 @@ from shop.models import Product
 
 class Order(models.Model):
     email = models.EmailField()
-    order_id = models.UUIDField(verbose_name='Номер заказа', default=uuid.uuid4(), unique=True)
+    invoice_id = models.CharField(verbose_name='Номер заказа', unique=True, max_length=128)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     paid = models.BooleanField(default=False)
@@ -18,7 +18,7 @@ class Order(models.Model):
         verbose_name_plural = 'Заказы'
 
     def __str__(self):
-        return 'Заказ #{}'.format(self.order_id)
+        return 'Заказ #{}'.format(self.invoice_id)
 
     def get_total_cost(self):
         return sum(item.get_cost() for item in self.items.all())
