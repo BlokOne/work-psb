@@ -35,15 +35,15 @@ def test_postback():
 	params = {
 		"status": "success", 
 		"invoice_id": "5YG2URFR",
-		"amount_crypto": 100,
+		"amount": 100,
 		"currency": "USDT",
 		"order_id": order_id,
 		"token": str(uuid.uuid4())
 	}
-	response = requests.post(url="http://127.0.0.1:8000/payments/success/", json=params)
+	response = requests.post(url="http://127.0.0.1:8000/payments/success/", json=params, headers=head)
 	data = response.json()
 	return data
 
 
 if __name__ == '__main__':
-	test_postback()
+	print(test_postback())

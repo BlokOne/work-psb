@@ -1,7 +1,9 @@
-import requests, uuid
+import requests, uuid, json
 from django.shortcuts import render, redirect
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt 
 
-from django.shortcuts import render
+
 from .models import OrderItem, Order
 from .forms import OrderCreateForm
 from cart.cart import Cart
@@ -32,12 +34,15 @@ def order_create(request):
                   {'cart': cart, 'form': form})
 
 
+@csrf_exempt
 def order_success(request):
     if request.method == "POST":
-        data = dict(request.POST.items())
-        invoice_id = str(data.get("invoice_id"))
+        data = request.body.decode('utf-8')
+        data = json.loads(data)
+        invoice_id = data.get("invoice_id")
         if check_paid(invoice_id):
             order = Order.objects.get(invoice_id=invoice_id)
             order.paid = True
             order.save()
-    return None
+            return JsonResponse({"status": True})
+    return JsonResponse({"status": False})

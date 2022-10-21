@@ -5,5 +5,5 @@ app_name = 'payments'
 
 urlpatterns = [
     path('create/', views.order_create, name='order_create'),
-    path('success/', views.order_create, name='order_success'),
+    path('success/', views.order_success, name='order_success'),
 ]
