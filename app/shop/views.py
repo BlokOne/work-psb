@@ -8,10 +8,13 @@ from django.contrib.auth import login
 
 from shop.forms import CustomUserCreationForm
 from shop.models import Product
+from payment.models import Order
 
 
-class Index(LoginRequiredMixin, TemplateView):
+class Index(LoginRequiredMixin, ListView):
     login_url = 'accounts/login/'
+    model = Order
+    context_object_name = 'orders'
     template_name = 'pages/index.html'
 
 

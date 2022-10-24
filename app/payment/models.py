@@ -11,6 +11,8 @@ class Order(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     paid = models.BooleanField(default=False)
+    text = models.TextField(verbose_name='В ведите текст который получит пользователь при покупки', default="", null=True, blank=True)
+
 
     class Meta:
         ordering = ('-created',)
@@ -35,3 +37,11 @@ class OrderItem(models.Model):
 
     def get_cost(self):
         return self.price * self.quantity
+
+
+"""
+class OrderDetails(models.Model):
+    email = models.EmailField()
+    order = models.ForeignKey(Order, related_name='details_order_items', on_delete=models.CASCADE)
+    text = models.TextField(verbose_name='В ведите текст который получит пользовательв при покупки')
+"""
