@@ -124,14 +124,14 @@ LOGIN_REDIRECT_URL = '/'
 
 
 
-EMAIL_HOST = "smtp.gmail.com"
-EMAIL_PORT = 587
-EMAIL_HOST_USER = "yas66yelchili@gmail.com"
-EMAIL_HOST_PASSWORD = "unvqqectandymzcq"
+EMAIL_HOST = "mail.netangels.ru"
+EMAIL_PORT = 25
+EMAIL_HOST_USER = "admin@psb-hosting.pro"
+EMAIL_HOST_PASSWORD = "sYst3m0ps"
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
-DEFAULT_FROM_EMAIL = "yas66yelchili@gmail.com"
-SERVER_EMAIL = "yas66yelchili@gmail.com"
+DEFAULT_FROM_EMAIL = "admin@psb-hosting.pro"
+SERVER_EMAIL = "admin@psb-hosting.pro"
 
 
 # Default primary key field type
