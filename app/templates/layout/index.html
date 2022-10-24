@@ -53,9 +53,9 @@
                 <div class="d-flex">
                     <a aria-label="Hide Sidebar" class="app-sidebar__toggle" data-bs-toggle="sidebar" href="javascript:void(0)"></a>
                     <!-- sidebar-toggle-->
-                    <a class="logo-horizontal " href="index.html">
+                    <a class="logo-horizontal " href="{% url 'shop:index' %}">
                         <img src="/static/assets/images/logo.png" class="header-brand-img desktop-logo" alt="logo">
-                        <img src="/static/assets/images/logo.png" class="header-brand-img light-logo1"
+                        <img src="/static/assets/images/logo.png" class="header-brand-img light-logo1" style="width: 153px"
                              alt="logo">
                     </a>
                     <!-- LOGO -->
@@ -107,12 +107,12 @@
                                         <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                                             <div class="drop-heading border-bottom">
                                                 <div class="d-flex">
-                                                    <h6 class="mt-1 mb-0 fs-16 fw-semibold text-dark">Notifications
+                                                    <h6 class="mt-1 mb-0 fs-16 fw-semibold text-dark">Уведомления
                                                     </h6>
                                                 </div>
                                             </div>
                                             <div class="notifications-menu">
-                                                <a class="dropdown-item d-flex" href="notify-list.html">
+                                                <a class="dropdown-item d-flex" href="">
                                                     <div class="me-3 notifyimg  bg-primary brround box-shadow-primary">
                                                         <i class="fe fe-mail"></i>
                                                     </div>
@@ -122,7 +122,7 @@
                                                         <span class="notification-subtext">3 days ago</span>
                                                     </div>
                                                 </a>
-                                                <a class="dropdown-item d-flex" href="notify-list.html">
+                                                <a class="dropdown-item d-flex" href="javascript:void(0)">
                                                     <div class="me-3 notifyimg  bg-secondary brround box-shadow-secondary">
                                                         <i class="fe fe-check-circle"></i>
                                                     </div>
@@ -132,7 +132,7 @@
                                                         <span class="notification-subtext">2 hours ago</span>
                                                     </div>
                                                 </a>
-                                                <a class="dropdown-item d-flex" href="notify-list.html">
+                                                <a class="dropdown-item d-flex" href="javascript:void(0)">
                                                     <div class="me-3 notifyimg  bg-success brround box-shadow-success">
                                                         <i class="fe fe-shopping-cart"></i>
                                                     </div>
@@ -142,7 +142,7 @@
                                                         <span class="notification-subtext">30 min ago</span>
                                                     </div>
                                                 </a>
-                                                <a class="dropdown-item d-flex" href="notify-list.html">
+                                                <a class="dropdown-item d-flex" href="javascript:void(0)">
                                                     <div class="me-3 notifyimg bg-pink brround box-shadow-pink">
                                                         <i class="fe fe-user-plus"></i>
                                                     </div>
@@ -153,9 +153,8 @@
                                                 </a>
                                             </div>
                                             <div class="dropdown-divider m-0"></div>
-                                            <a href="notify-list.html"
-                                               class="dropdown-item text-center p-3 text-muted">View all
-                                                Notification</a>
+                                            <a href="javascript:void(0)"
+                                               class="dropdown-item text-center p-3 text-muted">Просмотреть все</a>
                                         </div>
                                     </div>
                                     <!-- NOTIFICATIONS -->
@@ -171,7 +170,7 @@
                                                 </div>
                                             </div>
                                             <div class="dropdown-divider m-0"></div>
-                                            <a class="dropdown-item" href="profile.html">
+                                            <a class="dropdown-item" href="javascript:void(0)">
                                                 <i class="dropdown-icon fe fe-user"></i> Профиль
                                             </a>
                                             <a class="dropdown-item" href="/accounts/password_change/">
@@ -234,7 +233,7 @@
                                     <a href="javascript:void(0)">Мои услуги</a>
                                 </li>
                                 <li>
-                                    <a href="cards.html" class="slide-item"> Cards design</a>
+                                    <a href="javascript:void(0)" class="slide-item"> Еще в разработке</a>
                                 </li>
                             </ul>
                         </li>
@@ -279,8 +278,8 @@
         <div class="container">
             <div class="row align-items-center flex-row-reverse">
                 <div class="col-md-12 col-sm-12 text-center">
-                    Copyright © <span id="year"></span> <a href="javascript:void(0)">Sash</a>. Designed with <span
-                        class="fa fa-heart text-danger"></span> by <a href="javascript:void(0)"> Spruko </a> All rights reserved.
+                    Копирование без письменного разрешения администратора сайта запрещено © <a href="javascript:void(0)">PSB</a> <span id="year"></span>. Разработано студией <span
+                        class="fa fa-heart text-danger"></span> <a href="javascript:void(0)"> AiLab </a> Все права защищены.
                 </div>
             </div>
         </div>
