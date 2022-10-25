@@ -98,13 +98,14 @@
                                                                                 class="bg-transparent border-bottom-0">
                                                                             Цена</th>
                                                                         <th class="bg-transparent border-bottom-0"
-                                                                            style="width: 10%;">Status</th>
+                                                                            style="width: 10%;">Статус</th>
                                                                         <th class="bg-transparent border-bottom-0"
-                                                                            style="width: 5%;">Action</th>
+                                                                            style="width: 5%;">Действия</th>
                                                                     </tr>
                                                                     </thead>
                                                                     <tbody>
                                                                     {% for order in orders %}
+                                                                    {% if order.email == user.email %}
                                                                     <tr class="border-bottom">
                                                                         <td class="text-center">
                                                                             <div class="mt-0 mt-sm-2 d-block">
@@ -144,17 +145,16 @@
                                                                         {% endif %}
                                                                         <td>
                                                                             <div class="g-2">
-                                                                                <a class="btn text-primary btn-sm"
-                                                                                   data-bs-toggle="tooltip"
-                                                                                   data-bs-original-title="Edit"><span
-                                                                                        class="fe fe-edit fs-14"></span></a>
-                                                                                <a class="btn text-danger btn-sm"
-                                                                                   data-bs-toggle="tooltip"
-                                                                                   data-bs-original-title="Delete"><span
-                                                                                        class="fe fe-trash-2 fs-14"></span></a>
+                                                                                <a class="btn btn-danger" href="/payments/delete?invoice_id={{ order.invoice_id }}">Удалить</a>
+                                                                                {% if order.paid %}
+                                                                                <a class="btn btn-primary" href="#">Подробнее</a>
+                                                                                {% else %}
+                                                                                <a class="btn btn-primary" href="https://pay.cryptocloud.plus/{{ order.invoice_id }}">Оплатить</a>
+                                                                                {% endif %}
                                                                             </div>
                                                                         </td>
                                                                     </tr>
+                                                                    {% endif %}
                                                                     {% endfor %}
 
                                                                     

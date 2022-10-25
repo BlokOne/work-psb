@@ -46,4 +46,5 @@ def test_postback():
 
 
 if __name__ == '__main__':
-	print(test_postback())
+	#print(test_postback())
+	print(auth(10, str(uuid.uuid4())))

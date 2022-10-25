@@ -46,3 +46,10 @@ def order_success(request):
             order.save()
             return JsonResponse({"status": True})
     return JsonResponse({"status": False})
+
+
+def order_delete(request):
+    invoice_id = request.GET.get("invoice_id")
+    if invoice_id:
+        Order.objects.filter(invoice_id=invoice_id).delete()
+    return redirect("/")
