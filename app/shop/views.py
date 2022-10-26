@@ -53,3 +53,15 @@ class ShopDetail(LoginRequiredMixin, DetailView):
 class Support(LoginRequiredMixin, TemplateView):
     login_url = '/accounts/login/'
     template_name = 'pages/support.html'
+
+
+class DetailOrder(LoginRequiredMixin, DetailView):
+    login_url = '/accounts/login/'
+    model = Order
+    context_object_name = 'order'
+    template_name = 'pages/orders/detail.html'
+
+"""
+def DetailOrder(request, invoice_id):
+    return render(request, "pages/orders/detail.html")
+"""

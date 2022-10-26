@@ -22,8 +22,10 @@
                         </div>
                     </div>
                     <!-- PAGE-HEADER END -->
+                    
 
                     <!-- ROW-1 -->
+                    <!--
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12">
                             <div class="row">
@@ -32,10 +34,11 @@
                                         <div class="card-body text-center">
                                             <i class="pe-7s-server text-primary fa-3x"></i>
                                             <h6 class="mt-4 mb-2">Активных услуг</h6>
-                                            <h2 class="mb-2 number-font">834</h2>
+                                            <h2 class="mb-2 number-font">get_count_order</h2>
                                         </div>
                                     </div>
                                 </div>
+                                
                                 <div class="col-sm-6 col-md-6 col-lg-6 col-xl-3">
                                     <div class="card">
                                         <div class="card-body text-center">
@@ -65,7 +68,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
                     <!-- ROW-1 END -->
 
 
@@ -75,7 +78,7 @@
                         <div class="col-12 col-sm-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title mb-0">Product Sales</h3>
+                                    <h3 class="card-title mb-0">Заказы</h3>
                                 </div>
                                 <div class="card-body pt-4">
                                     <div class="grid-margin">
@@ -105,6 +108,7 @@
                                                                     </thead>
                                                                     <tbody>
                                                                     {% for order in orders %}
+                                                                    
                                                                     {% if order.email == user.email %}
                                                                     <tr class="border-bottom">
                                                                         <td class="text-center">
@@ -119,23 +123,14 @@
                                                                         <td><span
                                                                                 class="fw-semibold mt-sm-2 d-block">{{order.get_total_cost}} $</span>
                                                                         </td>
-                                                                        {% if order.paid and order.text != "" %}
+                                                                        {% if order.paid %}
                                                                         <td>
                                                                             <div class="mt-sm-1 d-block">
                                                                                         <span
                                                                                                 class="badge bg-success-transparent rounded-pill text-success p-2 px-3">Оплачено</span>
                                                                             </div>
                                                                         </td>
-                                                                        {% endif %}
-                                                                        {% if order.paid and not order.text %}
-                                                                        <td>
-                                                                            <div class="mt-sm-1 d-block">
-                                                                                        <span
-                                                                                                class="badge bg-warning-transparent rounded-roll text-warning p-2 px-3">В обработке</span>
-                                                                            </div>
-                                                                        </td>
-                                                                        {% endif %}
-                                                                        {% if not order.paid %}
+                                                                        {% else %}
                                                                         <td>
                                                                             <div class="mt-sm-1 d-block">
                                                                                         <span
@@ -146,9 +141,8 @@
                                                                         <td>
                                                                             <div class="g-2">
                                                                                 <a class="btn btn-danger" href="/payments/delete?invoice_id={{ order.invoice_id }}">Удалить</a>
-                                                                                {% if order.paid %}
-                                                                                <a class="btn btn-primary" href="#">Подробнее</a>
-                                                                                {% else %}
+                                                                                <a class="btn btn-primary" href="/detail/{{ order.pk }}">Подробнее</a>
+                                                                                {% if not order.paid %}
                                                                                 <a class="btn btn-primary" href="https://pay.cryptocloud.plus/{{ order.invoice_id }}">Оплатить</a>
                                                                                 {% endif %}
                                                                             </div>
