@@ -2,6 +2,14 @@
 
 {% block title %}
     <title>psb-hosting.pro - Магазин услуг - VDS/VPS сервера для вашего бизнеса</title>
+<style>
+.filterDiv {
+  display: none;
+}
+.show {
+  display: block;
+}
+</style>
 {% endblock %}
 
 {% block content %}
@@ -13,6 +21,7 @@
             <div class="main-container container-fluid">
 
                 <!-- PAGE-HEADER -->
+                
                 <div class="page-header">
                     <h1 class="page-title">Магазин услуг</h1>
                     <div>
@@ -22,6 +31,7 @@
                         </ol>
                     </div>
                 </div>
+                
                 <!-- PAGE-HEADER END -->
 
                 <!-- ROW-1 OPEN -->
@@ -45,6 +55,12 @@
                                                 <div class="float-sm-end float-none my-1">
                                                     <a href="#" class="btn btn-primary me-2">Заказать индивидуальный сервер</a>
                                                     <a href="#" class="btn btn-primary">Связаться с Тех-поддержкой</a>
+                                                    <div id="myBtnContainer">
+                                                    <button class="btn active btn-primary" onclick="filterSelection('all')">Показать все</button>
+                                                    {% for c in country %}
+                                                    <button class="btn btn-primary" onclick="filterSelection('group{{ c.pk }}')">{{ c.title }}</button>
+                                                    {% endfor %}
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -56,6 +72,7 @@
                             <div class="tab-pane active" id="tab-11">
                                 <div class="row">
                                     {% for serv in page_obj %}
+                                        <div class="filterDiv group{{ serv.country.pk }}">
                                         <div class="col-sm-6 col-md-6 col-xl-3 alert">
                                             <div class="card">
                                                 <div class="product-grid6">
@@ -67,6 +84,7 @@
                                                     <div class="card-body pt-0">
                                                         <div class="product-content text-center">
                                                             <h1 class="title fw-bold fs-20"><a href="#">{{ serv.title }}</a></h1>
+                                                            <p><b>{{ serv.country.title }}</b></p>
                                                             <p class="text fs-18">{{ serv.configurations }}</p>
                                                             <div class="mb-2 text-warning">
                                                                 <i class="fa fa-star text-warning"></i>
@@ -87,6 +105,7 @@
                                                             <a href="javascript:void(0)" class="btn btn-light mx-2 mb-1 w-sm"><i class="fe fe-share-2 me-2 text-dark"></i>Поделиться</a>
                                                         </form>
                                                     </div>
+                                                </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -127,4 +146,56 @@
         </div>
     </div>
     <!--app-content closed-->
+
+<script>
+filterSelection("all")
+function filterSelection(c) {
+  var x, i;
+  x = document.getElementsByClassName("filterDiv");
+  
+  if (c == "all") c = "";
+  // Добавить класс "show" (display:block) к отфильтрованным элементам и удалите класс "show" из элементов, которые не выбраны
+  for (i = 0; i < x.length; i++) {
+    w3RemoveClass(x[i], "show");
+    if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
+  }
+}
+
+// Показать отфильтрованные элементы
+function w3AddClass(element, name) {
+  var i, arr1, arr2;
+  arr1 = element.className.split(" ");
+  arr2 = name.split(" ");
+  for (i = 0; i < arr2.length; i++) {
+    if (arr1.indexOf(arr2[i]) == -1) {
+      element.className += " " + arr2[i];
+    }
+  }
+}
+
+// Скрыть элементы, которые не выбраны
+function w3RemoveClass(element, name) {
+  var i, arr1, arr2;
+  arr1 = element.className.split(" ");
+  arr2 = name.split(" ");
+  for (i = 0; i < arr2.length; i++) {
+    while (arr1.indexOf(arr2[i]) > -1) {
+      arr1.splice(arr1.indexOf(arr2[i]), 1);
+    }
+  }
+  element.className = arr1.join(" ");
+}
+
+// Добавить активный класс к текущей кнопке управления (выделите ее)
+var btnContainer = document.getElementById("myBtnContainer");
+var btns = btnContainer.getElementsByClassName("btn");
+for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener("click", function() {
+    var current = document.getElementsByClassName("active");
+    current[0].className = current[0].className.replace(" active", "");
+    this.className += " active";
+  });
+}
+
+</script>
 {% endblock %}

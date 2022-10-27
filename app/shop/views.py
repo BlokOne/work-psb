@@ -7,7 +7,7 @@ from django.contrib.auth import login
 
 
 from shop.forms import CustomUserCreationForm
-from shop.models import Product
+from shop.models import Product, Country
 from payment.models import Order
 
 
@@ -41,6 +41,12 @@ class Shops(LoginRequiredMixin, ListView):
     model = Product
     context_object_name = 'product'
     paginate_by = 8
+    
+    def get_context_data(self, **kwargs):
+        country = Country.objects.all()
+        context = super().get_context_data(**kwargs)
+        context["country"] = country
+        return context
 
 
 class ShopDetail(LoginRequiredMixin, DetailView):
