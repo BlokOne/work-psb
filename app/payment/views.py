@@ -36,16 +36,15 @@ def order_create(request):
 
 @csrf_exempt
 def order_success(request):
-    if request.method == "POST":
-        data = request.body.decode('utf-8')
-        data = json.loads(data)
-        invoice_id = data.get("invoice_id")
+    if request.method == "GET":
+        invoice_id = request.GET.get("invoice_id")
         if check_paid(invoice_id):
             order = Order.objects.get(invoice_id=invoice_id)
             order.paid = True
             order.save()
-            return JsonResponse({"status": True})
-    return JsonResponse({"status": False})
+            # return JsonResponse({"status": True})
+    # return JsonResponse({"status": False})
+    return redirect("/")
 
 
 def order_delete(request):

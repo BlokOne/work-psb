@@ -34,13 +34,13 @@ def test_postback():
 	head = {'Content-type': 'application/json', 'Accept': 'application/json'}
 	params = {
 		"status": "success", 
-		"invoice_id": "5YG2URFR",
+		"invoice_id": "Z97EAS0U",
 		"amount": 100,
 		"currency": "USDT",
 		"order_id": order_id,
 		"token": str(uuid.uuid4())
 	}
-	response = requests.post(url="http://127.0.0.1:8000/payments/success/", json=params, headers=head)
+	response = requests.get(url="http://127.0.0.1:8000/payments/success/", params=params, headers=head)
 	data = response.json()
 	return data
 
