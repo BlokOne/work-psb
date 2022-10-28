@@ -5,33 +5,29 @@ from django.views.decorators.csrf import csrf_exempt
 
 
 from .models import OrderItem, Order
-from .forms import OrderCreateForm
+#from .forms import OrderCreateForm
 from cart.cart import Cart
-
 from .payment import auth, check_paid
 
 
 def order_create(request):
     cart = Cart(request)
-    if request.method == 'POST':
-        form = OrderCreateForm(request.POST)
-        if form.is_valid():
-            data = auth(float(cart.get_total_price()), str(uuid.uuid4()))
-            order = Order(email=form.cleaned_data.get("email"), invoice_id=data["invoice_id"])
-            order.save()
-            for item in cart:
-                OrderItem.objects.create(order=order,
-                                         product=item['product'],
-                                         price=item['price'],
-                                         quantity=item['quantity'])
-            # очистка корзины
-            cart.clear()
-            return redirect(data["pay_url"])
+    data = auth(float(cart.get_total_price()), str(uuid.uuid4()))
+    order = Order(email=request.user.email, invoice_id=data["invoice_id"])
+    order.save()
+    for item in cart:
+        OrderItem.objects.create(order=order,
+                                product=item['product'],
+                                price=item['price'],
+                                quantity=item['quantity'])
+    # очистка корзины
+    cart.clear()
+    return redirect(data["pay_url"])
 
-    else:
-        form = OrderCreateForm
-    return render(request, 'pages/orders/created.html',
-                  {'cart': cart, 'form': form})
+
+def order_print(request):
+    cart = Cart(request)
+    return render(request, 'pages/orders/created.html', {'cart': cart})
 
 
 @csrf_exempt

@@ -64,15 +64,8 @@
                                 </div>
                             </div>
                             <div class="card-footer text-end">
-                                <form method="post" class="order-form">
-                                    {{ form.as_p }}
-                                    {{ form.errors }}
-                                    <p><input type="submit" value="Place order"></p>
-                                    {% csrf_token %}
-                                </form>
-                                <button type="button" class="btn btn-primary mb-1" onclick="javascript:window.print();"><i class="si si-wallet"></i> Pay Invoice</button>
-                                <button type="button" class="btn btn-secondary mb-1" onclick="javascript:window.print();"><i class="si si-paper-plane"></i> Send Invoice</button>
-                                <button type="button" class="btn btn-danger mb-1" onclick="javascript:window.print();"><i class="si si-printer"></i> Print Invoice</button>
+                                <a class="btn btn-primary mb-1" href="/payments/create/"><i class="si si-wallet" ></i>Оплатить</a>
+                                <button type="button" class="btn mb-1 btn-danger" onclick="javascript:window.print();">Напечатать</button>
                             </div>
                         </div>
                     </div>
