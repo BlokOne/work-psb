@@ -20,8 +20,8 @@ def check_paid(invoice_id):
 	params = {"uuid": "INV-" + str(invoice_id)}
 	response = requests.get(url="https://api.cryptocloud.plus/v1/invoice/info", headers=headers, params=params)
 	data = response.json()
-	# return data.get("status_invoice") == "paid"
-	return data.get("status_invoice") == "created"
+	return data.get("status_invoice") == "paid"
+	# return data.get("status_invoice") == "created"
 
 
 # testing
