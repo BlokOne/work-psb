@@ -188,10 +188,12 @@
                                                     <tr>
                                                         <th>Данные</th>
                                                         <td>
-                                                          {% if item.text %}
+                                                          {% if item.text and order.paid %}
                                                           {{ item.text }}
-                                                          {% else %}
+                                                          {% elif not item.text and order.paid %}
                                                            <span class="badge bg-danger-transparent rounded-roll text-warning p-2 px-3">В обработке</span>
+                                                          {% else %}
+                                                           <span class="badge bg-danger-transparent rounded-roll text-danger p-2 px-3">не оплачено</span>
                                                           {% endif %}
                                                         </td>
                                                     </tr>

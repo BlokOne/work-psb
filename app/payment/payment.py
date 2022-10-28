@@ -34,7 +34,7 @@ def test_postback():
 	head = {'Content-type': 'application/json', 'Accept': 'application/json'}
 	params = {
 		"status": "success", 
-		"invoice_id": "Z97EAS0U",
+		"invoice_id": "INV-WF5I8ZR9",
 		"amount": 100,
 		"currency": "USDT",
 		"order_id": order_id,

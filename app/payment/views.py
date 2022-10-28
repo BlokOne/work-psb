@@ -33,7 +33,7 @@ def order_print(request):
 @csrf_exempt
 def order_success(request):
     if request.method == "GET":
-        invoice_id = request.GET.get("invoice_id")
+        invoice_id = request.GET.get("invoice_id")[4:]
         if check_paid(invoice_id):
             order = Order.objects.get(invoice_id=invoice_id)
             order.paid = True
