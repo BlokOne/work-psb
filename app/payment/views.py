@@ -27,7 +27,7 @@ def order_create(request):
 
 def order_print(request):
     cart = Cart(request)
-    return render(request, 'pages/orders/created.html', {'cart': cart})
+    return render(request, 'theme/pages/orders/created.html', {'cart': cart})
 
 
 @csrf_exempt

@@ -5,7 +5,6 @@ from django.views.generic import TemplateView, ListView, DetailView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
 
-
 from shop.forms import CustomUserCreationForm
 from shop.models import Product, Country
 from payment.models import Order
@@ -15,7 +14,7 @@ class Index(LoginRequiredMixin, ListView):
     login_url = 'accounts/login/'
     model = Order
     context_object_name = 'orders'
-    template_name = 'pages/index.html'
+    template_name = 'theme/pages/index.html'
 
 
 def Register(request):
@@ -37,15 +36,17 @@ def Register(request):
 
 class Shops(LoginRequiredMixin, ListView):
     login_url = '/accounts/login/'
-    template_name = 'pages/shop.html'
+    template_name = 'theme/pages/shop.html'
     model = Product
     context_object_name = 'product'
     paginate_by = 8
-    
+
     def get_context_data(self, **kwargs):
         country = Country.objects.all()
+        product = Product.objects.all().order_by('?')[0:4]
         context = super().get_context_data(**kwargs)
         context["country"] = country
+        context["product"] = product
         return context
 
 
@@ -65,7 +66,13 @@ class DetailOrder(LoginRequiredMixin, DetailView):
     login_url = '/accounts/login/'
     model = Order
     context_object_name = 'order'
-    template_name = 'pages/orders/detail.html'
+    template_name = 'theme/pages/orders/detail.html'
+
+
+class Settings(LoginRequiredMixin, TemplateView):
+    login_url = '/accounts/login/'
+    template_name = 'theme/pages/editprofile.html'
+
 
 """
 def DetailOrder(request, invoice_id):

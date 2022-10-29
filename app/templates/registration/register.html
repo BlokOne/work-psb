@@ -7,15 +7,14 @@
     <meta charset="UTF-8">
     <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Sash – Bootstrap 5  Admin & Dashboard Template">
-    <meta name="author" content="Spruko Technologies Private Limited">
+    <meta name="description" content="psb-hosting.pro VDS/VPS Сервера для ваших бизнес решений">    <meta name="author" content="Spruko Technologies Private Limited">
     <meta name="keywords" content="admin,admin dashboard,admin panel,admin template,bootstrap,clean,dashboard,flat,jquery,modern,responsive,premium admin templates,responsive admin,ui,ui kit.">
 
     <!-- FAVICON -->
     <link rel="shortcut icon" type="image/x-icon" href="/static/assets/images/brand/favicon.ico" />
 
     <!-- TITLE -->
-    <title>Sash – Bootstrap 5 Admin & Dashboard Template</title>
+    <title>Регистрация – Создание нового аккаунта</title>
 
     <!-- BOOTSTRAP CSS -->
     <link id="style" href="/static/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
@@ -34,7 +33,7 @@
 
 </head>
 
-<body class="app sidebar-mini ltr login-img">
+<body class="app sidebar-mini ltr">
 
     <!-- BACKGROUND-IMAGE -->
     <div class="">
@@ -52,7 +51,7 @@
                 <!-- CONTAINER OPEN -->
                 <div class="col col-login mx-auto mt-7">
                     <div class="text-center">
-                        <a href="index.html"><img src="/static/assets/images/brand/logo-white.png" class="header-brand-img m-0" alt=""></a>
+                    <a href="{% url 'shop:index' %}"><img src="/static/assets/images/logo.png" height="150" class="header-brand-img" alt=""></a>
                     </div>
                 </div>
                 <div class="container-login100">
@@ -72,37 +71,37 @@
                                 <a href="javascript:void(0)" class="input-group-text bg-white text-muted">
                                     <i class="mdi mdi-account" aria-hidden="true"></i>
                                 </a>
-                                <input class="input100 border-start-0 ms-0 form-control" type="text" placeholder="User name" name="username" maxlength="150" autocapitalize="none" autocomplete="username" autofocus required id="id_username">
+                                <input class="input100 border-start-0 ms-0 form-control" type="text" placeholder="Имя пользователя" name="username" maxlength="150" autocapitalize="none" autocomplete="username" autofocus required id="id_username">
                             </div>
                             <div class="wrap-input100 validate-input input-group" data-bs-validate="Valid email is required: ex@abc.xyz" id="id_email">
                                 <a href="javascript:void(0)" class="input-group-text bg-white text-muted">
                                     <i class="zmdi zmdi-email" aria-hidden="true"></i>
                                 </a>
                               
-                                <input class="input100 border-start-0 ms-0 form-control" type="email" placeholder="Email" name="email" maxlength="150" autocapitalize="none" autocomplete="email" autofocus required id="email">
+                                <input class="input100 border-start-0 ms-0 form-control" type="email" placeholder="Электронная почта" name="email" maxlength="150" autocapitalize="none" autocomplete="email" autofocus required id="email">
                             </div>
                             <div class="wrap-input100 validate-input input-group" id="Password-toggle">
                                 <a href="javascript:void(0)" class="input-group-text bg-white text-muted">
                                     <i class="zmdi zmdi-eye" aria-hidden="true"></i>
                                 </a>
-                                <input class="input100 border-start-0 ms-0 form-control" type="password" placeholder="Password" name="password1" maxlength="150" autocapitalize="none" autocomplete="password1" autofocus required id="password1">
+                                <input class="input100 border-start-0 ms-0 form-control" type="password" placeholder="Введите пароль" name="password1" maxlength="150" autocapitalize="none" autocomplete="password1" autofocus required id="password1">
                             </div>
                             <div class="wrap-input100 validate-input input-group" id="Password-toggle">
                                 <a href="javascript:void(0)" class="input-group-text bg-white text-muted">
                                     <i class="zmdi zmdi-eye" aria-hidden="true"></i>
                                 </a>
-                                <input class="input100 border-start-0 ms-0 form-control" type="password" placeholder="Password2" name="password2" maxlength="150" autocapitalize="none" autocomplete="password2" autofocus required id="password2">
+                                <input class="input100 border-start-0 ms-0 form-control" type="password" placeholder="Повторите пароль" name="password2" maxlength="150" autocapitalize="none" autocomplete="password2" autofocus required id="password2">
                             </div>
                            <!-- <label class="custom-control custom-checkbox mt-4">
 									<input type="checkbox" class="custom-control-input">
 									<span class="custom-control-label">Согласен с  <a href="terms.html">условиями и политикой</a></span>
 								</label>-->
                             <div class="container-login100-form-btn">
-                                <input class="login100-form-btn btn-primary" type="submit" value="Register" formmethod="post">
+                                <input class="login100-form-btn btn-primary" type="submit" value="Зарегистрироваться" formmethod="post">
                             </div>
                                 
                             <div class="text-center pt-3">
-                                <p class="text-dark mb-0">Уже есть аккаунт?<a href="/" class="text-primary ms-1">Войти</a></p>
+                                <p class="text-dark mb-0">Уже есть аккаунт?<a href="{% url 'shop:index' %}" class="text-primary ms-1">Войти</a></p>
                             </div>
                             <!--
                             <label class="login-social-icon"><span>Register with Social</span></label>

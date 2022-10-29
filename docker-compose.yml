@@ -1,4 +1,4 @@
- services:
+services:
   backend:
     build: ./app
     command: gunicorn projectname.wsgi:application --bind 0.0.0.0:8000
@@ -33,3 +33,9 @@
       - letsencrypt:/etc/letsencrypt
       - static_volume:/home/app/web/static
       - media_volume:/home/app/web/media
+
+volumes:
+  postgres_data:
+  static_volume:
+  media_volume:
+  letsencrypt:
