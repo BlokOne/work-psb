@@ -83,12 +83,15 @@ class Settings(LoginRequiredMixin, TemplateView):
     def post(self, request):
         p = request.POST
         npd_post = {'csrfmiddlewaretoken': p.get('csrfmiddlewaretoken'), 'username': p.get('username'), 'email': p.get('email')}
-        npd = NewPersonalData(npd_post, instance=request.user)
+        old_npd = NewPersonalData(npd_post, instance=request.user)
         du_post = {'csrfmiddlewaretoken': p.get('csrfmiddlewaretoken'), 'check': p.get('check')}
-        du =  DeleteUser(du_post)
-        if npd.is_valid():
-            npd.save()
-        if du_post['check'] and du.is_valid():
+        old_du =  DeleteUser(du_post)
+        if old_npd.is_valid():
+            old_npd.save()
+        if du_post['check'] and old_du.is_valid():
             User.objects.filter(username=request.user.username).delete()
             return redirect("/")
-        return redirect("/settings/")
+        npd = NewPersonalData(instance=request.user)
+        du = DeleteUser()
+        context = {"npd": npd, 'du': du, "old_npd": old_npd}
+        return render(request, self.template_name, context)

@@ -8,7 +8,7 @@ urlpatterns = [
     path('detail/<int:pk>', views.DetailOrder.as_view(), name='detail_order'),
     path("register/", views.Register, name="register"),
     path('shop/', views.Shops.as_view(), name="shop"),
-    path('shop/<int:pk>', views.ShopDetail.as_view(), name='detail'),
+    # path('shop/<int:pk>', views.ShopDetail.as_view(), name='detail'),
     path('support/', views.Support.as_view(), name='support'),
     path('settings/', views.Settings.as_view(), name='settings')
 ]

@@ -6,7 +6,21 @@
     <script src="/static/assets/plugins/notify/js/rainbow.js"></script>
     <script src="/static/assets/plugins/notify/js/jquery.growl.js"></script>
     <script src="/static/assets/plugins/notify/js/notifIt.js"></script>
-
+    <script type="text/javascript">
+        {% for field in old_npd %}
+        {% for error in field.errors %}
+            function not5() {
+                notif({
+                    type: "error",
+                    msg: "Ошибка: {{ error|escape }}",
+                    position: "right",
+                    opacity: 0.6
+                });
+            }
+            not5()
+        {% endfor %}
+        {% endfor %}
+    </script>
     <!--app-content open-->
     <div class="main-content app-content mt-0">
         <div class="side-app">
@@ -29,7 +43,7 @@
                 <!-- ROW-1 OPEN -->
                 <div class="row">
                     <div class="col-xl-4">
-                        <form  method="post">
+                        <form  method="post" action="/accounts/password_change/">
                         {% csrf_token %}
                         <div class="card">
                             <div class="card-header">
@@ -47,14 +61,13 @@
                                         <p class="text-muted mt-0 mb-0 pt-0 fs-13">{{ request.user.email }}</p>
                                     </div>
                                 </div>
-                                <form  method="post" actions="/accounts/password_change/">
                                 <div class="form-group">
                                     <label class="form-label">Текущий пароль</label>
                                     <div class="wrap-input100 validate-input input-group" id="Password-toggle">
                                         <a href="javascript:void(0)" class="input-group-text bg-white text-muted">
                                             <i class="zmdi zmdi-eye text-muted" aria-hidden="true"></i>
                                         </a>
-                                        <input class="input100 form-control" type="password" placeholder="Введите текущий пароль" autocomplete="current-password" >
+                                        <input class="input100 form-control" type="password" placeholder="Введите текущий пароль" name="old_password" autocomplete="current-password" autofocus required id="id_old_password">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -63,7 +76,7 @@
                                         <a href="javascript:void(0)" class="input-group-text bg-white text-muted">
                                             <i class="zmdi zmdi-eye text-muted" aria-hidden="true"></i>
                                         </a>
-                                        <input class="input100 form-control" type="password" placeholder="Введите новый пароль" autocomplete="new-password">
+                                        <input class="input100 form-control" tplaceholder="Введите новый пароль" name="new_password1" autocomplete="new-password" required id="id_new_password1">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -72,10 +85,9 @@
                                         <a href="javascript:void(0)" class="input-group-text bg-white text-muted">
                                             <i class="zmdi zmdi-eye text-muted" aria-hidden="true"></i>
                                         </a>
-                                        <input class="input100 form-control" type="password" placeholder="Повторите новый пароль" autocomplete="new-password">
+                                        <input class="input100 form-control"  type="password" placeholder="Повторите новый пароль" name="new_password2" autocomplete="new-password" required id="id_new_password2">
                                     </div>
                                 </div>
-                                </form>
                             </div>
                             <div class="card-footer text-end">
                                 <button type="submit" class="btn btn-primary">Обновить</button>
