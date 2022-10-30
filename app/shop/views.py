@@ -4,8 +4,9 @@ from django.views import View
 from django.views.generic import TemplateView, ListView, DetailView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
+from django.contrib.auth.models import User
 
-from shop.forms import CustomUserCreationForm
+from shop.forms import *
 from shop.models import Product, Country
 from payment.models import Order
 
@@ -73,8 +74,21 @@ class Settings(LoginRequiredMixin, TemplateView):
     login_url = '/accounts/login/'
     template_name = 'theme/pages/editprofile.html'
 
+    def get(self, request):
+        npd = NewPersonalData(instance=request.user)
+        du = DeleteUser()
+        context = {"npd": npd, 'du': du}
+        return render(request, self.template_name, context)
 
-"""
-def DetailOrder(request, invoice_id):
-    return render(request, "pages/orders/detail.html")
-"""
+    def post(self, request):
+        p = request.POST
+        npd_post = {'csrfmiddlewaretoken': p.get('csrfmiddlewaretoken'), 'username': p.get('username'), 'email': p.get('email')}
+        npd = NewPersonalData(npd_post, instance=request.user)
+        du_post = {'csrfmiddlewaretoken': p.get('csrfmiddlewaretoken'), 'check': p.get('check')}
+        du =  DeleteUser(du_post)
+        if npd.is_valid():
+            npd.save()
+        if du_post['check'] and du.is_valid():
+            User.objects.filter(username=request.user.username).delete()
+            return redirect("/")
+        return redirect("/settings/")

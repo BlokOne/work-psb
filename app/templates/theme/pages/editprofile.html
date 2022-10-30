@@ -2,6 +2,11 @@
 {% block title %}Изменение профиля{% endblock %}
 
 {% block content %}
+    <script src="/static/assets/js/jquery.min.js"></script>
+    <script src="/static/assets/plugins/notify/js/rainbow.js"></script>
+    <script src="/static/assets/plugins/notify/js/jquery.growl.js"></script>
+    <script src="/static/assets/plugins/notify/js/notifIt.js"></script>
+
     <!--app-content open-->
     <div class="main-content app-content mt-0">
         <div class="side-app">
@@ -24,6 +29,8 @@
                 <!-- ROW-1 OPEN -->
                 <div class="row">
                     <div class="col-xl-4">
+                        <form  method="post">
+                        {% csrf_token %}
                         <div class="card">
                             <div class="card-header">
                                 <div class="card-title">Изменения пароля</div>
@@ -40,13 +47,14 @@
                                         <p class="text-muted mt-0 mb-0 pt-0 fs-13">{{ request.user.email }}</p>
                                     </div>
                                 </div>
+                                <form  method="post" actions="/accounts/password_change/">
                                 <div class="form-group">
                                     <label class="form-label">Текущий пароль</label>
                                     <div class="wrap-input100 validate-input input-group" id="Password-toggle">
                                         <a href="javascript:void(0)" class="input-group-text bg-white text-muted">
                                             <i class="zmdi zmdi-eye text-muted" aria-hidden="true"></i>
                                         </a>
-                                        <input class="input100 form-control" type="password" placeholder="Введите текущий пароль" autocomplete="current-password">
+                                        <input class="input100 form-control" type="password" placeholder="Введите текущий пароль" autocomplete="current-password" >
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -67,58 +75,59 @@
                                         <input class="input100 form-control" type="password" placeholder="Повторите новый пароль" autocomplete="new-password">
                                     </div>
                                 </div>
+                                </form>
                             </div>
                             <div class="card-footer text-end">
-                                <a href="javascript:void(0)" class="btn btn-primary">Обновить</a>
-                                <a href="javascript:void(0)" class="btn btn-danger">Отменить</a>
+                                <button type="submit" class="btn btn-primary">Обновить</button>
+                                <!--<a href="javascript:void(0)" class="btn btn-danger">Отменить</a>-->
                             </div>
                         </div>
+                        </form>
                     </div>
                     <div class="col-xl-8">
                         <div class="card">
+                            <form  method="post">
+                            {% csrf_token %}
                             <div class="card-header">
                                 <h3 class="card-title">Изменение личной информации</h3>
                             </div>
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-lg-6 col-md-12">
                                         <div class="form-group">
-                                            <label for="exampleInputname">Имя</label>
-                                            <input type="text" class="form-control" id="exampleInputname" placeholder="Введите ваше имя">
+                                            <label for="exampleInputname">Ник</label>
+                                            {{ npd.username }}
                                         </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-12">
-                                        <div class="form-group">
-                                            <label for="exampleInputname1">Фамилия</label>
-                                            <input type="text" class="form-control" id="exampleInputname1" placeholder="Введите вашу фамилию">
-                                        </div>
-                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Электронная почта</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Введите электронную почту">
+                                    {{ npd.email }}
                                 </div>
+                                
                             </div>
                             <div class="card-footer text-end">
-                                <a href="javascript:void(0)" class="btn btn-success my-1">Сохранить</a>
-                                <a href="javascript:void(0)" class="btn btn-danger my-1">Отменить</a>
+                                <button type="submit" class="btn btn-success my-1">Сохранить</button>
+                                <!--<button type="reset" class="btn btn-danger my-1">Отменить</button>-->
                             </div>
+                        </form>
                         </div>
                         <div class="card">
+                            <form  method="post">
+                            {% csrf_token %}
                             <div class="card-header">
                                 <div class="card-title">Удаление аккаунта</div>
                             </div>
                             <div class="card-body">
                                 <p>Удаление вашего аккаунта повлечет удаление ваших активных услуг, требуется подтверждение по почте.</p>
                                 <label class="custom-control custom-checkbox mb-0">
-                                    <input type="checkbox" class="custom-control-input" name="example-checkbox1" value="option1" checked>
+                                    {{ du.check }}
                                     <span class="custom-control-label">Да, я понимаю что удаляя свой аккаунт удаляю и активные услуги.</span>
                                 </label>
                             </div>
                             <div class="card-footer text-end">
-                                <a href="javascript:void(0)" class="btn btn-primary my-1">Деактивировать</a>
-                                <a href="javascript:void(0)" class="btn btn-danger my-1">Удаление аккаунта</a>
+                                <!--<a href="javascript:void(0)" class="btn btn-primary my-1">Деактивировать</a>-->
+                                <button type="submit" class="btn btn-danger my-1">Удаление аккаунта</button>
                             </div>
+                        </form>
                         </div>
                     </div>
                 </div>
@@ -130,4 +139,6 @@
         </div>
     </div>
     <!--app-content open-->
+<!-- SHOW PASSWORD JS -->
+<script src="/static/assets/js/show-password.min.js"></script>
 {% endblock %}
