@@ -40,9 +40,3 @@ class OrderItem(models.Model):
         return self.price * self.quantity
 
 
-"""
-class OrderDetails(models.Model):
-    email = models.EmailField()
-    order = models.ForeignKey(Order, related_name='details_order_items', on_delete=models.CASCADE)
-    text = models.TextField(verbose_name='В ведите текст который получит пользовательв при покупки')
-"""
