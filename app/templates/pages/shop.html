@@ -72,8 +72,8 @@
                             <div class="tab-pane active" id="tab-11">
                                 <div class="row">
                                     {% for serv in page_obj %}
-                                        <div class="filterDiv group{{ serv.country.pk }}">
-                                        <div class="col-sm-6 col-md-6 col-xl-3 alert">
+                                        
+                                        <div class="col-sm-6 col-md-6 col-xl-3 alert filterDiv group{{ serv.country.pk }}">
                                             <div class="card">
                                                 <div class="product-grid6">
                                                     <div class="product-image6 p-5">
@@ -106,7 +106,7 @@
                                                         </form>
                                                     </div>
                                                 </div>
-                                                </div>
+                                                
                                             </div>
                                         </div>
                                     {% endfor %}

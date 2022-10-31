@@ -116,8 +116,11 @@
                                                         </div>
                                                     </div>
                                                     <div class="card-footer text-center">
+                                                      <p>Количество: <b id="id_text{{ cart.pk }}">1</b></p>
+                                                            <button  onclick="quantityFunc('{{ cart.pk }}', '-')" class="btn btn-primary mx-2 mb-1 w-sm">-</button>
+                                                            <button  onclick="quantityFunc('{{ cart.pk }}', '+')" class="btn btn-primary mx-2 mb-1 w-sm">+</button>
                                                         <form action="{% url "cart:cart_add" cart.id %}" method="post">
-                                                            <input type="hidden" name="quantity" value="1">
+                                                            <input type="hidden" name="quantity" value="1" id="id_quantiny{{ cart.pk }}">
                                                             {% csrf_token %}
                                                             <button type="submit" class="btn btn-primary mx-2 mb-1 w-sm"><i class="fe fe-shopping-cart me-2"></i>В коpзину</button>
                                                         </form>
@@ -162,6 +165,19 @@
         </div>
     </div>
     <!--app-content closed-->
+    <script>
+      function quantityFunc(id_cart, sign) {
+        input_quantity = document.getElementById("id_quantiny" + id_cart)
+        text = document.getElementById("id_text" + id_cart)
+        if (sign == "+") {
+          input_quantity.value = Number(input_quantity.value) + 1
+        }
+        if (sign == "-" && input_quantity.value > 1) {
+          input_quantity.value = Number(input_quantity.value) - 1
+        }
+        text.textContent = input_quantity.value
+      }
+    </script>
     <script type="application/javascript">
         filterSelection("all")
         function filterSelection(c) {
