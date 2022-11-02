@@ -42,9 +42,9 @@
                                     <div class="card-body">
                                         <ul class="list-group">
                                             <div id="myBtnContainer">
-                                                <li class="list-group-item border-0 p-0"> <button class="btn" onclick="filterSelection('all')" ><i class="fe fe-chevron-right"></i>Все товары</button></li>
+                                                <li class="list-group-item border-0 p-0"> <button class="btn btn_cas" onclick="filterSelection('all')" ><i class="fe fe-chevron-right"></i>Все товары</button></li>
                                                 {% for c in country %}
-                                                    <li class="list-group-item border-0 p-0"> <button class="btn" onclick="filterSelection('group{{ c.pk }}')" ><i class="fe fe-chevron-right"></i>{{ c.title }}</button></li>
+                                                    <li class="list-group-item border-0 p-0"> <button class="btn btn_cas" onclick="filterSelection('group{{ c.pk }}')" ><i class="fe fe-chevron-right"></i><p class="btn_text">{{ c.title }}</p></button></li>
                                                 {% endfor %}
                                             </div>
                                         </ul>

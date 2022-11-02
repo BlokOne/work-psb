@@ -1,4 +1,5 @@
 @charset "UTF-8";
+
 /*------------------------------------------------------------------
 [Master Stylesheet]
 
@@ -1783,6 +1784,8 @@ button.btn-close:focus {
 .btn:not(:disabled):not(.disabled):active,
 .btn:not(:disabled):not(.disabled).active {
     background-image: none;
+    border: 1px solid black;
+
 }
 
 @media screen and (prefers-reduced-motion: reduce) {
@@ -1888,6 +1891,7 @@ fieldset:disabled a.btn {
     color: #fff;
     background-color: #13bfa6;
     border-color: #32cab4;
+
 }
 
 .btn-success:not(:disabled):not(.disabled):active:focus,
@@ -5231,6 +5235,7 @@ input[type=button].btn-block {
     border-radius: 0;
     padding-left: 1.5rem;
     padding-right: 1.5rem;
+    margin-bottom: 5px;
 }
 
 .card-list-group .list-group-item:last-child {
@@ -62795,6 +62800,7 @@ ul {
     .sidenav-toggled .header-brand-img.light-logo {
         display: block;
         margin-right: 0;
+        height:100%;
     }
 }
 
@@ -76016,6 +76022,81 @@ textarea.form-control {
     .w-sm-60 {
         width: 60% !important;
     }
+}
+
+
+.btn_cas {
+    display: flex;
+    align-items:center;
+    gap: 2px;
+    border: 1px solid transparent;
+}
+
+
+
+.btn_text {
+    margin-bottom: 0px;
+    word-break: break-all;
+    white-space: break-spaces;
+}
+
+.wrapper {
+    display:flex; 
+    flex-direction: column;
+    align-items: flex-start;
+    border: 1px solid #808080a8;
+    padding: 25px;
+    border-radius: 10px;
+    margin-bottom:15px;
+    gap:5px;
+}
+.wrapper p {
+    margin:0px;
+}
+.wrapper__btns {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap:wrap;
+}
+
+.wrapper__text {
+    display:flex;
+    gap:5px;
+    align-items: center;
+}
+
+.wrapper__text span {
+    font-weight: 600;
+}
+.wrapper__status{
+    display:flex;
+    gap:5px;
+    align-items: center;
+}
+@media (min-width: 1024px) {
+    .wrapper  {
+        display:none;
+        }
+        .table-bordered {
+            display:block;
+            }
+    }
+
+@media (max-width: 1024px) {
+.table-bordered {
+    display:none;
+    }
+.wrapper {
+    display:flex;
+}
+}
+.side-header {
+    padding: 0;
+}
+
+.header-brand-img{
+    height: 100%;
 }
 
 /*# sourceMappingURL=style.css.map */
