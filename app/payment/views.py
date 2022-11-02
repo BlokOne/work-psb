@@ -4,8 +4,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt 
 
 
-from .models import OrderItem, Order
-#from .forms import OrderCreateForm
+from .models import *
 from cart.cart import Cart
 from .payment import auth, check_paid
 
@@ -16,7 +15,13 @@ def order_create(request):
     order = Order(email=request.user.email, invoice_id=data["invoice_id"])
     order.save()
     for item in cart:
-        OrderItem.objects.create(order=order,
+        if not item['optional']:
+            OrderItem.objects.create(order=order,
+                                product=item['product'],
+                                price=item['price'],
+                                quantity=item['quantity'])
+        else:
+            OrderAddItem.objects.create(order=order,
                                 product=item['product'],
                                 price=item['price'],
                                 quantity=item['quantity'])
@@ -38,8 +43,6 @@ def order_success(request):
             order = Order.objects.get(invoice_id=invoice_id)
             order.paid = True
             order.save()
-            # return JsonResponse({"status": True})
-    # return JsonResponse({"status": False})
     return redirect("/")
 
 

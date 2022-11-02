@@ -6,28 +6,35 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST
 from django.views.generic import TemplateView
 
-from shop.models import Product
+from shop.models import Product, AddProduct
 from .cart import Cart
 from .forms import CartAddProductForm
 
 
 @require_POST
-def cart_add(request, pk):
+def cart_add(request, id, optional):
     cart = Cart(request)
-    product = get_object_or_404(Product, id=pk)
+    optional = (optional == "optional")
+    if not optional:
+        product = get_object_or_404(Product, id=id)
+    else:
+        product = get_object_or_404(AddProduct, id=id)
     form = CartAddProductForm(request.POST)
     if form.is_valid():
         cd = form.cleaned_data
         cart.add(product=product,
                  quantity=cd['quantity'],
-                 update_quantity=cd['update'])
-        print(cd)
+                 update_quantity=cd['update'],
+                 optional=optional)
     return redirect('cart:cart_detail')
 
 
-def cart_remove(request, pk):
+def cart_remove(request, id, optional):
     cart = Cart(request)
-    product = get_object_or_404(Product, id=pk)
+    if optional == "True":
+        product = get_object_or_404(AddProduct, id=id)
+    else:
+        product = get_object_or_404(Product, id=id)
     cart.remove(product)
     return redirect('cart:cart_detail')
 
