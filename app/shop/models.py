@@ -1,4 +1,5 @@
 from django.db import models
+import uuid
 
 
 class Country(models.Model):
@@ -13,6 +14,7 @@ class Country(models.Model):
 
 
 class Product(models.Model):
+    id = models.CharField(primary_key=True, default=uuid.uuid4, editable=False, max_length=100)
     title = models.CharField(verbose_name='Наименование товара', max_length=100)
     configurations = models.TextField(verbose_name='Описание конфигурации')
     price = models.IntegerField(verbose_name='Цена')
@@ -29,6 +31,7 @@ class Product(models.Model):
   
 
 class AddProduct(models.Model):
+    id = models.CharField(primary_key=True, default=uuid.uuid4, editable=False, max_length=100)
     title = models.CharField(verbose_name='Наименование товара', max_length=100)
     configurations = models.TextField(verbose_name='Описание конфигурации')
     price = models.IntegerField(verbose_name='Цена')
@@ -47,6 +50,6 @@ class AddProduct(models.Model):
 
 class AddItem(models.Model):
     product = models.ForeignKey(Product, related_name='add_products', on_delete=models.CASCADE)
-    add_product = models.ForeignKey(AddProduct, related_name='add_products', on_delete=models.CASCADE)
+    add_product = models.ForeignKey(AddProduct, related_name='add_items', on_delete=models.CASCADE)
 
  

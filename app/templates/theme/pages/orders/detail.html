@@ -208,6 +208,52 @@
                                     </div>
                                 </div>
                                 <br><br>
+                                {% endfor %} 
+                                {% for item in order.add_items.all %}
+                                <div class="">
+                                    <div class="row">
+                                        <div class="col-xl-12">
+                                            <div class="table-responsive">
+                                                <table class="table mb-0 table-bordered text-nowrap">
+                                                    <tbody>
+                                                    <tr>
+                                                        <th>Продукт</th>
+                                                        <td>{{ item.product.title }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Количество</th>
+                                                        <td>{{ item.quantity }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Цена</th>
+                                                        <td>{{ item.price }} $</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Данные</th>
+                                                        <td>
+                                                          {% if item.text and order.paid %}
+                                                          {{ item.text }}
+                                                          {% elif not item.text and order.paid %}
+                                                           <span class="badge bg-danger-transparent rounded-roll text-warning p-2 px-3">В обработке</span>
+                                                          {% else %}
+                                                           <span class="badge bg-danger-transparent rounded-roll text-danger p-2 px-3">не оплачено</span>
+                                                          {% endif %}
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <!--
+                                            <div class="mt-5 text-center">
+                                                <button type="button" class="btn btn-icon  btn-info-light me-2 bradius"><i class="fe fe-edit"></i></button>
+                                                <button type="button" class="btn btn-icon  btn-danger-light me-2 bradius"><i class="fe fe-trash"></i></button>
+                                                <button type="button" class="btn btn-icon  btn-success-light me-2 bradius"><i class="fe fe-download fs-14"></i></button>
+                                                <button type="button" class="btn btn-icon  btn-warning-light bradius"><i class="fe fe-share-2 fs-14"></i></button>
+                                            </div>-->
+                                        </div>
+                                    </div>
+                                </div>
+                                <br><br>
                                 {% endfor %}
                             </div>
                         </div>

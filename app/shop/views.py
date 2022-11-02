@@ -9,6 +9,7 @@ from django.contrib.auth.models import User
 from shop.forms import *
 from shop.models import Product, Country
 from payment.models import Order
+from cart.cart import Cart
 
 
 class Index(LoginRequiredMixin, ListView):
@@ -49,6 +50,23 @@ class Shops(LoginRequiredMixin, ListView):
         context["country"] = country
         context["product"] = product
         return context
+
+
+class OptionalShops(LoginRequiredMixin, TemplateView):
+    login_url = '/accounts/login/'
+    template_name = 'theme/pages/optional_shop.html'
+
+    def get(self, request):
+        product = Product.objects.all()
+        cart = Cart(request)
+        optional_product = []
+        for item in cart:
+            if not item['optional']:
+                opt = item['product'].add_products
+                for i in opt.all():
+                    optional_product.append(i.add_product)
+        context = {'products': optional_product}
+        return render(request, self.template_name, context)
 
 
 class ShopDetail(LoginRequiredMixin, DetailView):

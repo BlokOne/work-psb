@@ -39,7 +39,7 @@
                                     <table class="table table-bordered table-hover mb-0 text-nowrap">
                                         <tbody>
                                         <tr class=" ">
-                                            <th class="text-center"></th>
+                                            <!--<th class="text-center"></th>-->
                                             <th>Товар</th>
                                             <th class="text-center">Количество</th>
                                             <th class="text-end">Цена за штуку</th>
@@ -47,7 +47,7 @@
                                         </tr>
                                         {% for item in cart %}
                                             <tr>
-                                                <td class="text-center">{{ item.product.id }}</td>
+                                                <!--<td class="text-center">{{ item.product.id }}</td>-->
                                                 <td>
                                                     <p class="font-w600 mb-1">{{ item.product.title }}</p>
                                                     <div class="text-muted">
@@ -63,9 +63,29 @@
                                     </table>
                                 </div>
                             </div>
+                            <div class="card-body">
+                                {% with total_items=cart|length %}
+                                    {% if cart|length > 0 %}
+                                        <ul class="list-group border br-7 mt-5">
+                                            <li class="list-group-item border-0">
+                                                Сумма заказа
+                                                <span class="h6 fw-bold mb-0 float-end">$ {{ cart.get_total_price }}</span>
+                                            </li>
+                                            <li class="list-group-item border-0">
+                                                Размещение
+                                                <span class="h6 fw-bold mb-0 float-end">Бесплатно</span>
+                                            </li>
+                                            <li class="list-group-item border-0">
+                                                К оплате
+                                                <span class="h4 fw-bold mb-0 float-end">$ {{ cart.get_total_price }}</span>
+                                            </li>
+                                        </ul>
+                                    {% endif %}
+                                {% endwith %}
+                            </div>
                             <div class="card-footer text-end">
-                                <a class="btn btn-primary mb-1" href="/payments/create/"><i class="si si-wallet" ></i>Оплатить</a>
                                 <button type="button" class="btn mb-1 btn-danger" onclick="javascript:window.print();">Напечатать</button>
+                                <a class="btn btn-primary mb-1" href="/payments/create/"><i class="si si-wallet" ></i>Оплатить</a>
                             </div>
                         </div>
                     </div>
