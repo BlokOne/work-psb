@@ -1,51 +1,83 @@
 {% extends 'layout/index.html' %}
 
 {% block content %}
-    <!--app-content open-->
-    <div class="main-content app-content mt-0">
-        <div class="side-app">
+<!--app-content open-->
+<div class="main-content app-content mt-0">
+    <div class="side-app">
 
-            <!-- CONTAINER -->
-            <div class="main-container container-fluid">
+        <!-- CONTAINER -->
+        <div class="main-container container-fluid">
 
-                <!-- PAGE-HEADER -->
-                <div class="page-header">
-                    <h1 class="page-title">Просмотр активной услуги</h1>
-                    <div>
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="javascript:void(0)">Панель управления</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Активная услуга</li>
-                        </ol>
+            <!-- PAGE-HEADER -->
+            <div class="page-header">
+                <h1 class="page-title">Просмотр активной услуги</h1>
+                <div>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">Панель управления</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Активная услуга</li>
+                    </ol>
+                </div>
+
+            </div>
+            <!-- PAGE-HEADER END -->
+
+            <!-- Row -->
+            <div class="wrapper__head">
+                <div class="wrapp__min">
+                    <div class="wrapp__min__item">
+                        <p class="wrapp__min__text">
+                            Нагрузка на процессор: <span>30%</span>
+                        </p>
+                    </div>
+                    <div class="wrapp__min__item">
+                        <p class="wrapp__min__text">
+                            Нагрузка на ОЗУ: <span>30%</span>
+                        </p>
                     </div>
                 </div>
-                <!-- PAGE-HEADER END -->
 
-                <!-- Row -->
-                {% if order.email == user.email %}
-                <div class="row row-sm">
-                    <div class="col-xl-8 col-lg-12 col-md-12">
-                        <div class="card custom-card overflow-hidden">
-                        </div>
-                        <div class="card custom-card">
-                            <div class="card border-bottom-0 p-3">
-                                <h3 class="text-center">  Заказ номер {{ order.invoice_id }}</h3>
-                                <h6>Дата создания заказа: {{ order.created }}</h6>
-                                <h6>Общая цена: {{ order.get_total_cost }} $</h6>
-                                <h6>Статус оплаты: 
+                <div class="wrapper__head__item">
+                    <p class="wrapper__head__text">
+                        Диск:
+                    </p>
+                    <p class="wrapper__head__text">
+                        Всего: <span>10gb</span>
+                    </p>
+                    <p class="wrapper__head__text">
+                        Использовано: <span>10gb</span>
+                    </p>
+                    <p class="wrapper__head__text">
+                        Cвободно: <span>10gb</span>
+                    </p>
+                </div>
+            </div>
+            {% if order.email == user.email %}
+            <div class="row row-sm">
+                <div class="col-xl-8 col-lg-12 col-md-12">
+                    <div class="card custom-card overflow-hidden">
+                    </div>
+                    <div class="card custom-card">
+                        <div class="card border-bottom-0 p-3">
+                            <h3 class="text-center"> Заказ номер {{ order.invoice_id }}</h3>
+                            <h6>Дата создания заказа: {{ order.created }}</h6>
+                            <h6>Общая цена: {{ order.get_total_cost }} $</h6>
+                            <h6>Статус оплаты:
                                 {% if order.paid %}
-                                    <span
-                                        class="badge bg-success-transparent rounded-pill text-success p-2 px-3">Оплачено</span>
-                                </h6><br>
-                                {% else %}
-                                   <span
-                                        class="badge bg-danger-transparent rounded-roll text-danger p-2 px-3">Не оплачено</span>
-                                </h6><br>
-                                <a class="btn btn-primary" href="https://pay.cryptocloud.plus/{{ order.invoice_id }}">Оплатить заказ</a>
-                                {% endif %}
-                                <a class="btn btn-danger" href="/payments/delete?invoice_id={{ order.invoice_id }}">Удалить заказ</a>
-                                
-                            </div>
-                            <!--
+                                <span
+                                    class="badge bg-success-transparent rounded-pill text-success p-2 px-3">Оплачено</span>
+                            </h6><br>
+                            {% else %}
+                            <span class="badge bg-danger-transparent rounded-roll text-danger p-2 px-3">Не
+                                оплачено</span>
+                            </h6><br>
+                            <a class="btn btn-primary"
+                                href="https://pay.cryptocloud.plus/{{ order.invoice_id }}">Оплатить заказ</a>
+                            {% endif %}
+                            <a class="btn btn-danger" href="/payments/delete?invoice_id={{ order.invoice_id }}">Удалить
+                                заказ</a>
+
+                        </div>
+                        <!--
                             <div class="card-body pt-0 h-100">
                                 <div class="owl-carousel owl-carousel-icons2">
                                     <div class="item">
@@ -155,109 +187,117 @@
                                     </div>
                                 </div>
                             </div>-->
+                    </div>
+                </div>
+
+
+                <div class="col-xl-4 col-lg-12 col-md-12">
+                    <div class="card custom-card">
+                        <div class="card-body">
+                            <h5 class="mb-3">Услуги</h5>
+                            {% for item in order.items.all %}
+                            <div class="">
+                                <div class="row">
+                                    <div class="col-xl-12">
+                                        <div class="table-responsive">
+                                            <table class="table mb-0 table-bordered text-nowrap">
+                                                <tbody>
+                                                    <tr>
+                                                        <th>Продукт</th>
+                                                        <td>{{ item.product.title }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Количество</th>
+                                                        <td>{{ item.quantity }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Цена</th>
+                                                        <td>{{ item.price }} $</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Данные</th>
+                                                        <td>
+                                                            {% if item.text and order.paid %}
+                                                            {{ item.text }}
+                                                            {% elif not item.text and order.paid %}
+                                                            <span
+                                                                class="badge bg-danger-transparent rounded-roll text-warning p-2 px-3">В
+                                                                обработке</span>
+                                                            {% else %}
+                                                            <span
+                                                                class="badge bg-danger-transparent rounded-roll text-danger p-2 px-3">не
+                                                                оплачено</span>
+                                                            {% endif %}
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <!--
+                                            <div class="mt-5 text-center">
+                                                <button type="button" class="btn btn-icon  btn-info-light me-2 bradius"><i class="fe fe-edit"></i></button>
+                                                <button type="button" class="btn btn-icon  btn-danger-light me-2 bradius"><i class="fe fe-trash"></i></button>
+                                                <button type="button" class="btn btn-icon  btn-success-light me-2 bradius"><i class="fe fe-download fs-14"></i></button>
+                                                <button type="button" class="btn btn-icon  btn-warning-light bradius"><i class="fe fe-share-2 fs-14"></i></button>
+                                            </div>-->
+                                    </div>
+                                </div>
+                            </div>
+                            <br><br>
+                            {% endfor %}
+                            {% for item in order.add_items.all %}
+                            <div class="">
+                                <div class="row">
+                                    <div class="col-xl-12">
+                                        <div class="table-responsive">
+                                            <table class="table mb-0 table-bordered text-nowrap">
+                                                <tbody>
+                                                    <tr>
+                                                        <th>Продукт</th>
+                                                        <td>{{ item.product.title }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Количество</th>
+                                                        <td>{{ item.quantity }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Цена</th>
+                                                        <td>{{ item.price }} $</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Данные</th>
+                                                        <td>
+                                                            {% if item.text and order.paid %}
+                                                            {{ item.text }}
+                                                            {% elif not item.text and order.paid %}
+                                                            <span
+                                                                class="badge bg-danger-transparent rounded-roll text-warning p-2 px-3">В
+                                                                обработке</span>
+                                                            {% else %}
+                                                            <span
+                                                                class="badge bg-danger-transparent rounded-roll text-danger p-2 px-3">не
+                                                                оплачено</span>
+                                                            {% endif %}
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <!--
+                                            <div class="mt-5 text-center">
+                                                <button type="button" class="btn btn-icon  btn-info-light me-2 bradius"><i class="fe fe-edit"></i></button>
+                                                <button type="button" class="btn btn-icon  btn-danger-light me-2 bradius"><i class="fe fe-trash"></i></button>
+                                                <button type="button" class="btn btn-icon  btn-success-light me-2 bradius"><i class="fe fe-download fs-14"></i></button>
+                                                <button type="button" class="btn btn-icon  btn-warning-light bradius"><i class="fe fe-share-2 fs-14"></i></button>
+                                            </div>-->
+                                    </div>
+                                </div>
+                            </div>
+                            <br><br>
+                            {% endfor %}
                         </div>
                     </div>
-                    
-        
-                    <div class="col-xl-4 col-lg-12 col-md-12">
-                        <div class="card custom-card">
-                            <div class="card-body">
-                                <h5 class="mb-3">Услуги</h5>
-                                {% for item in order.items.all %}
-                                <div class="">
-                                    <div class="row">
-                                        <div class="col-xl-12">
-                                            <div class="table-responsive">
-                                                <table class="table mb-0 table-bordered text-nowrap">
-                                                    <tbody>
-                                                    <tr>
-                                                        <th>Продукт</th>
-                                                        <td>{{ item.product.title }}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Количество</th>
-                                                        <td>{{ item.quantity }}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Цена</th>
-                                                        <td>{{ item.price }} $</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Данные</th>
-                                                        <td>
-                                                          {% if item.text and order.paid %}
-                                                          {{ item.text }}
-                                                          {% elif not item.text and order.paid %}
-                                                           <span class="badge bg-danger-transparent rounded-roll text-warning p-2 px-3">В обработке</span>
-                                                          {% else %}
-                                                           <span class="badge bg-danger-transparent rounded-roll text-danger p-2 px-3">не оплачено</span>
-                                                          {% endif %}
-                                                        </td>
-                                                    </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                            <!--
-                                            <div class="mt-5 text-center">
-                                                <button type="button" class="btn btn-icon  btn-info-light me-2 bradius"><i class="fe fe-edit"></i></button>
-                                                <button type="button" class="btn btn-icon  btn-danger-light me-2 bradius"><i class="fe fe-trash"></i></button>
-                                                <button type="button" class="btn btn-icon  btn-success-light me-2 bradius"><i class="fe fe-download fs-14"></i></button>
-                                                <button type="button" class="btn btn-icon  btn-warning-light bradius"><i class="fe fe-share-2 fs-14"></i></button>
-                                            </div>-->
-                                        </div>
-                                    </div>
-                                </div>
-                                <br><br>
-                                {% endfor %} 
-                                {% for item in order.add_items.all %}
-                                <div class="">
-                                    <div class="row">
-                                        <div class="col-xl-12">
-                                            <div class="table-responsive">
-                                                <table class="table mb-0 table-bordered text-nowrap">
-                                                    <tbody>
-                                                    <tr>
-                                                        <th>Продукт</th>
-                                                        <td>{{ item.product.title }}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Количество</th>
-                                                        <td>{{ item.quantity }}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Цена</th>
-                                                        <td>{{ item.price }} $</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Данные</th>
-                                                        <td>
-                                                          {% if item.text and order.paid %}
-                                                          {{ item.text }}
-                                                          {% elif not item.text and order.paid %}
-                                                           <span class="badge bg-danger-transparent rounded-roll text-warning p-2 px-3">В обработке</span>
-                                                          {% else %}
-                                                           <span class="badge bg-danger-transparent rounded-roll text-danger p-2 px-3">не оплачено</span>
-                                                          {% endif %}
-                                                        </td>
-                                                    </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                            <!--
-                                            <div class="mt-5 text-center">
-                                                <button type="button" class="btn btn-icon  btn-info-light me-2 bradius"><i class="fe fe-edit"></i></button>
-                                                <button type="button" class="btn btn-icon  btn-danger-light me-2 bradius"><i class="fe fe-trash"></i></button>
-                                                <button type="button" class="btn btn-icon  btn-success-light me-2 bradius"><i class="fe fe-download fs-14"></i></button>
-                                                <button type="button" class="btn btn-icon  btn-warning-light bradius"><i class="fe fe-share-2 fs-14"></i></button>
-                                            </div>-->
-                                        </div>
-                                    </div>
-                                </div>
-                                <br><br>
-                                {% endfor %}
-                            </div>
-                        </div>
-                        <!--
+                    <!--
                         <div class="card custom-card">
                             <div class="card-body pb-0">
                                 <h5 class="mb-3">Recent Files</h5>
@@ -298,14 +338,14 @@
                     </div>
                 </div>
                 -->
-                <!-- End Row-->
-            </div>
-            <!-- CONTAINER CLOSED -->
+                    <!-- End Row-->
+                </div>
+                <!-- CONTAINER CLOSED -->
 
+            </div>
         </div>
-    </div>
-    {% else %}
-    <h2 class="text-center">У вас нет данного заказа</h2>
-    {% endif %}
-    <!--app-content closed-->
-{% endblock %}
+        {% else %}
+        <h2 class="text-center">У вас нет данного заказа</h2>
+        {% endif %}
+        <!--app-content closed-->
+        {% endblock %}
